@@ -1,7 +1,14 @@
+
+filetype on	"开启文件类型侦测
+filetype indent on	"适应不同语言的缩进
+syntax enable	"开启语法高亮功能
+syntax on 	"允许使用用户配色
+
+
+"""""""""""""""""""""""""""""""""""""""""""显示设置"""""""""""""""""""""""""""""""""""""""""""""
 set number                      " 显示行号
 set relativenumber              " 行号以相对当前行的方式显示，方便跳转
 set showtabline=0               " 隐藏顶部标签栏
-set cursorline                  " 突出显示当前行
 "uset cursorcolumn                " 突出显示当前列
 syntax enable                   " 启用语法高亮度
 syntax on                       " 开启语法高亮
@@ -27,29 +34,64 @@ set showmode                    " 显示我们当前所处的模式
 set matchtime=1                 " 匹配括号高亮的时间（单位是十分之一秒） 
 set autoread                    " 设置当文件被改动时自动载入
 set autowrite                   " 自动保存
-"my colemak key
-map Y y$                        " 复制 从光标到行尾 所在范围的文本
-noremap <C-s> :w<CR>            " Normal 模式，按 Ctrl+s 保存文件
-noremap <C-q> :q!<CR>
-nnoremap U <C-r>                " 取消撤销操作，减少按键操作
-noremap k i
-noremap n h
-noremap e j
-noremap i l
-noremap u k
-noremap N 5h
-noremap E 5j
-noremap I 5l
-noremap U 5k
+set laststatus=2        	"总是显示状态栏
+set ruler               	"显示光标位置
+set cursorline          	"高亮显示当前行
+"set cursorcolumn            "高亮显示当前列
+exec "nohlsearch"
+set incsearch               "边输边高亮
+set ignorecase              "搜索时忽略大小写
+set smartcase
+
+set relativenumber          "其他行显示相对行号
+set scrolloff=5            "垂直滚动时光标距底部位置
+"
+"""""""""""""""""""""""""""""""""""""""按键映射(just for colemak user)"""""""""""""""""""""""""""""""
+
+"      ^    
+"      "      u    
+"      " < n     i >
+"      "      e    
+"      "      v    
+"
+"插入模式下的退出键
+"      inoremap tt <Esc>
+"
+"      “ 方向键
+      noremap n h
+      noremap u k
+      noremap e j
+      noremap i l
+      noremap N 7h
+      noremap U 5k
+      noremap E 5j
+      noremap I 7l
+"
+"      ” 跳至行首/行尾
+      noremap <C-n> 0
+      noremap <C-i> $
+      noremap k i
+      noremap K I
+      noremap l u
+"
+map Y y$                    " 复制 从光标到行尾 所在范围的文本
+      map s <nop>
+      map S :w<CR>
+      map Q :q<CR>
+      map R :source $MYVIMRC<CR>
+      map ; :
+
 " 预览插件 Markdown-preview 按键映射
+let g:mkdp_brower = 'chromium'
+let g:mkdp_echo_preview_url = 1
 nmap <silent> <F8> <Plug>MarkdownPreview        " 普通模式打开 md 预览
 imap <silent> <F8> <Plug>MarkdownPreview        " 插入模式打开 md 预览
 nmap <silent> <F9> <Plug>StopMarkdownPreview    " 普通模式关闭 md 预览
 imap <silent> <F9> <Plug>StopMarkdownPreview    " 插入模式关闭 md 预览
+      
+      "插件列表
 
-"插件列表
-
-call plug#begin('C:/User/Haihuangqianzhi/.AppData/local/nvim/plugged') "Vim 插件的安装路径，可以自定义。
+call plug#begin('~/.local/share/nvim/plugged') "Vim 插件的安装路径，可以自定义。
 "~ 表示系统路径，在windows下为 C:/User/username/
 " Apperance
 Plug 'vim-airline/vim-airline'
@@ -61,9 +103,3 @@ Plug 'iamcco/markdown-preview.vim'       " Markdown 预览工具
 
 
 call plug#end()
-
-
-
-
-
-
